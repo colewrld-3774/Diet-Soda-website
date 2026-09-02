@@ -418,8 +418,19 @@
             height: 120px;
             outline: none;
             --progress-bar-color: transparent;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+            --poster-color: transparent;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
             transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .berry model-viewer {
+            width: 100%;
+            height: 100%;
         }
 
         .b1 { top: 22%; left: 30%; width: 220px; height: 220px; }
@@ -1185,9 +1196,9 @@
 
             <!-- Background berries -->
             <div class="berries-container-bg">
-                <model-viewer class="berry b7" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-20deg 110deg 105%"></model-viewer>
-                <model-viewer class="berry b8" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="160deg 45deg 105%"></model-viewer>
-                <model-viewer class="berry b9" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 20deg 105%"></model-viewer>
+                <div class="berry b7" data-orbit="environment-image='neutral' exposure='1.0' interaction-prompt='none' camera-orbit='-20deg 110deg 105%'"><model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-20deg 110deg 105%" style="width:100%; height:100%;"></model-viewer></div>
+                <div class="berry b8" data-orbit="environment-image='neutral' exposure='1.0' interaction-prompt='none' camera-orbit='160deg 45deg 105%'"><model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="160deg 45deg 105%" style="width:100%; height:100%;"></model-viewer></div>
+                <div class="berry b9" data-orbit="environment-image='neutral' exposure='1.0' interaction-prompt='none' camera-orbit='45deg 20deg 105%'"><model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 20deg 105%" style="width:100%; height:100%;"></model-viewer></div>
             </div>
 
             <!-- Center 3D Soda Can -->
@@ -1201,34 +1212,34 @@
 
             <!-- Foreground Berries -->
             <div class="berries-container">
-                <model-viewer class="berry b1" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="45deg 120deg 105%"></model-viewer>
-                <model-viewer class="berry b2" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-120deg 45deg 105%"></model-viewer>
-                <model-viewer class="berry b3" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="200deg 90deg 105%"></model-viewer>
-                <model-viewer class="berry b4" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="10deg 20deg 105%"></model-viewer>
-                <model-viewer class="berry b5" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-45deg 160deg 105%"></model-viewer>
-                <model-viewer class="berry b6" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="80deg 75deg 105%"></model-viewer>
+                <div class="berry b1" data-orbit="environment-image='neutral' exposure='1.2' interaction-prompt='none' camera-orbit='45deg 120deg 105%'"><model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="45deg 120deg 105%" style="width:100%; height:100%;"></model-viewer></div>
+                <div class="berry b2" data-orbit="environment-image='neutral' exposure='1.2' interaction-prompt='none' camera-orbit='-120deg 45deg 105%'"><model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-120deg 45deg 105%" style="width:100%; height:100%;"></model-viewer></div>
+                <div class="berry b3" data-orbit="environment-image='neutral' exposure='1.2' interaction-prompt='none' camera-orbit='200deg 90deg 105%'"><model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="200deg 90deg 105%" style="width:100%; height:100%;"></model-viewer></div>
+                <div class="berry b4" data-orbit="environment-image='neutral' exposure='1.2' interaction-prompt='none' camera-orbit='10deg 20deg 105%'"><model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="10deg 20deg 105%" style="width:100%; height:100%;"></model-viewer></div>
+                <div class="berry b5" data-orbit="environment-image='neutral' exposure='1.2' interaction-prompt='none' camera-orbit='-45deg 160deg 105%'"><model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-45deg 160deg 105%" style="width:100%; height:100%;"></model-viewer></div>
+                <div class="berry b6" data-orbit="environment-image='neutral' exposure='1.2' interaction-prompt='none' camera-orbit='80deg 75deg 105%'"><model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="80deg 75deg 105%" style="width:100%; height:100%;"></model-viewer></div>
             </div>
 
             <!-- Right Column with Uganda Canned Soda Carousel -->
             <div class="hero-right">
                 <div class="product-carousel">
                     <div class="carousel-cards-wrapper" id="carouselWrapper">
-                        <!-- Sprite Lime (Default) -->
-                        <div class="card active" data-flavor="sprite" onclick="selectFlavor('sprite')">
+                        <!-- Diet Classic -->
+                        <div class="card active" data-flavor="classic" onclick="selectFlavor('classic')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" alt="Sprite Lime Can">
+                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" alt="Diet Classic Can">
                             <div class="card-info">
-                                <span>Sprite Lime</span>
+                                <span>Diet Classic</span>
                                 <span>UGX 3,000</span>
                             </div>
                         </div>
 
-                        <!-- Coca-Cola Original -->
-                        <div class="card" data-flavor="coke" onclick="selectFlavor('coke')">
+                        <!-- Zero Lime -->
+                        <div class="card" data-flavor="zero" onclick="selectFlavor('zero')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Blue%20Soda.png" style="filter: hue-rotate(140deg) saturate(1.8);" alt="Coca-Cola Can">
+                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Blue%20Soda.png" alt="Zero Lime Can">
                             <div class="card-info">
-                                <span>Coca-Cola</span>
+                                <span>Zero Lime</span>
                                 <span>UGX 3,000</span>
                             </div>
                         </div>
@@ -1236,19 +1247,29 @@
                         <!-- Stoney Tangawizi -->
                         <div class="card" data-flavor="stoney" onclick="selectFlavor('stoney')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" style="filter: sepia(0.8) hue-rotate(340deg) saturate(2);" alt="Stoney Tangawizi Can">
+                            <img src="assets/stoney_can_gen.jpg" style="mix-blend-mode: multiply; filter: brightness(1.2);" alt="Stoney Tangawizi Can">
                             <div class="card-info">
                                 <span>Stoney Ginger</span>
                                 <span>UGX 3,000</span>
                             </div>
                         </div>
 
-                        <!-- Fanta Orange -->
-                        <div class="card" data-flavor="fanta" onclick="selectFlavor('fanta')">
+                        <!-- Mirinda Pineapple -->
+                        <div class="card" data-flavor="mirinda_pine" onclick="selectFlavor('mirinda_pine')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" style="filter: hue-rotate(40deg) saturate(2);" alt="Fanta Orange Can">
+                            <img src="assets/mirinda_pineapple.jpg" style="mix-blend-mode: multiply; filter: brightness(1.2);" alt="Mirinda Pineapple Can">
                             <div class="card-info">
-                                <span>Fanta Orange</span>
+                                <span>Mirinda Pineapple</span>
+                                <span>UGX 3,000</span>
+                            </div>
+                        </div>
+
+                        <!-- Mirinda Apple -->
+                        <div class="card" data-flavor="mirinda_apple" onclick="selectFlavor('mirinda_apple')">
+                            <span class="card-tag">330ML CAN</span>
+                            <img src="assets/mirinda_apple.jpg" style="mix-blend-mode: multiply; filter: brightness(1.2);" alt="Mirinda Apple Can">
+                            <div class="card-info">
+                                <span>Mirinda Apple</span>
                                 <span>UGX 3,000</span>
                             </div>
                         </div>
@@ -1256,19 +1277,9 @@
                         <!-- Mountain Dew -->
                         <div class="card" data-flavor="dew" onclick="selectFlavor('dew')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" style="filter: hue-rotate(85deg) saturate(2.5);" alt="Mountain Dew Can">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Mountain_Dew_can.png/320px-Mountain_Dew_can.png" alt="Mountain Dew Can">
                             <div class="card-info">
                                 <span>Mountain Dew</span>
-                                <span>UGX 3,000</span>
-                            </div>
-                        </div>
-
-                        <!-- Pepsi Max -->
-                        <div class="card" data-flavor="pepsi" onclick="selectFlavor('pepsi')">
-                            <span class="card-tag">330ML CAN</span>
-                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Blue%20Soda.png" alt="Pepsi Can">
-                            <div class="card-info">
-                                <span>Pepsi Max</span>
                                 <span>UGX 3,000</span>
                             </div>
                         </div>
@@ -1298,12 +1309,12 @@
             <!-- 1. Flavor Picker -->
             <label style="font-size: 0.8rem; font-weight: 700; margin-bottom: 0.4rem; display: block; color: var(--muted-color);">Select Canned Flavor:</label>
             <div class="shop-flavor-grid" id="flavorPickerGrid">
-                <div class="shop-flavor-item active" data-flavor="sprite" onclick="setOrderFlavor('Sprite Lime', this)">🌿 Sprite Lime</div>
-                <div class="shop-flavor-item" data-flavor="coke" onclick="setOrderFlavor('Coca-Cola Original', this)">❤️ Coca-Cola</div>
+                <div class="shop-flavor-item active" data-flavor="classic" onclick="setOrderFlavor('Diet Classic', this)">🌿 Diet Classic</div>
+                <div class="shop-flavor-item" data-flavor="zero" onclick="setOrderFlavor('Zero Lime', this)">🍋 Zero Lime</div>
                 <div class="shop-flavor-item" data-flavor="stoney" onclick="setOrderFlavor('Stoney Tangawizi', this)">🔥 Stoney Ginger</div>
-                <div class="shop-flavor-item" data-flavor="fanta" onclick="setOrderFlavor('Fanta Orange', this)">🍊 Fanta Orange</div>
+                <div class="shop-flavor-item" data-flavor="mirinda_pine" onclick="setOrderFlavor('Mirinda Pineapple', this)">🍍 Mirinda Pineapple</div>
+                <div class="shop-flavor-item" data-flavor="mirinda_apple" onclick="setOrderFlavor('Mirinda Apple', this)">🍏 Mirinda Apple</div>
                 <div class="shop-flavor-item" data-flavor="dew" onclick="setOrderFlavor('Mountain Dew', this)">⚡ Mountain Dew</div>
-                <div class="shop-flavor-item" data-flavor="pepsi" onclick="setOrderFlavor('Pepsi Max', this)">🔵 Pepsi Max</div>
             </div>
 
             <!-- 2. Pack Size Selector -->
@@ -1529,35 +1540,47 @@
 
         // Flavor Palettes for Uganda Canned Sodas
         const flavorThemes = {
-            sprite: {
+            classic: {
                 inner: '#0b8a4f', mid: '#044e29', outer: '#011409',
-                name: 'Sprite Lime', modelTexture: 'green',
-                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+                name: 'Diet Classic', modelTexture: 'green',
+                berryType: 'model', berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb',
+                thumb: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png',
+                thumbStyle: ''
             },
-            coke: {
-                inner: '#8a0b0b', mid: '#4e0404', outer: '#140101',
-                name: 'Coca-Cola Original', modelTexture: 'blue',
-                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+            zero: {
+                inner: '#0b4f8a', mid: '#04294e', outer: '#010c14',
+                name: 'Zero Lime', modelTexture: 'blue',
+                berryType: 'model', berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blueberry.glb',
+                thumb: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Blue%20Soda.png',
+                thumbStyle: ''
             },
             stoney: {
                 inner: '#8c5311', mid: '#4d2d09', outer: '#140c02',
-                name: 'Stoney Tangawizi', modelTexture: 'green',
-                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+                name: 'Stoney Tangawizi', modelTexture: 'stoney',
+                berryType: 'emoji', berrySrc: '🍋‍🟩',
+                thumb: 'assets/stoney_can_gen.jpg',
+                thumbStyle: 'mix-blend-mode: multiply; filter: brightness(1.2);'
             },
-            fanta: {
-                inner: '#b35900', mid: '#663300', outer: '#1a0d00',
-                name: 'Fanta Orange', modelTexture: 'green',
-                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+            mirinda_pine: {
+                inner: '#8a7a0b', mid: '#4e4604', outer: '#141201',
+                name: 'Mirinda Pineapple', modelTexture: 'mirinda_pine',
+                berryType: 'emoji', berrySrc: '🍍',
+                thumb: 'assets/mirinda_pineapple.jpg',
+                thumbStyle: 'mix-blend-mode: multiply; filter: brightness(1.2);'
+            },
+            mirinda_apple: {
+                inner: '#2e8a0b', mid: '#184e04', outer: '#051401',
+                name: 'Mirinda Apple', modelTexture: 'mirinda_apple',
+                berryType: 'emoji', berrySrc: '🍏',
+                thumb: 'assets/mirinda_apple.jpg',
+                thumbStyle: 'mix-blend-mode: multiply; filter: brightness(1.2);'
             },
             dew: {
                 inner: '#4c8a0b', mid: '#284e04', outer: '#0a1401',
                 name: 'Mountain Dew', modelTexture: 'green',
-                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
-            },
-            pepsi: {
-                inner: '#0b4f8a', mid: '#04294e', outer: '#010c14',
-                name: 'Pepsi Max', modelTexture: 'blue',
-                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blueberry.glb'
+                berryType: 'emoji', berrySrc: '🍋',
+                thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Mountain_Dew_can.png/320px-Mountain_Dew_can.png',
+                thumbStyle: ''
             }
         };
 
@@ -1629,6 +1652,17 @@
             const berries = document.querySelectorAll('.berry');
             const heroCenter = document.querySelector('.hero-center');
 
+            let targetTexture = null;
+            if (theme.modelTexture === 'blue') targetTexture = blueTexture;
+            else if (theme.modelTexture === 'green') targetTexture = greenTexture;
+            else {
+                if (!window.textureCache) window.textureCache = {};
+                if (!window.textureCache[theme.modelTexture]) {
+                    window.textureCache[theme.modelTexture] = await modelViewer.createTexture(theme.thumb);
+                }
+                targetTexture = window.textureCache[theme.modelTexture];
+            }
+
             // 1. Background Morph
             gsap.to(body, {
                 '--bg-inner': theme.inner,
@@ -1651,7 +1685,6 @@
                 },
                 onComplete: async () => {
                     // Apply texture at peak
-                    const targetTexture = (theme.modelTexture === 'blue') ? blueTexture : greenTexture;
                     if (modelViewer.model && targetTexture) {
                         modelViewer.model.materials.forEach(mat => {
                             if (mat.pbrMetallicRoughness.baseColorTexture) {
@@ -1703,7 +1736,11 @@
                     duration: 0.45,
                     ease: "power2.in",
                     onComplete: () => {
-                        berry.src = theme.berrySrc;
+                        if (theme.berryType === 'emoji') {
+                            berry.innerHTML = theme.berrySrc;
+                        } else {
+                            berry.innerHTML = `<model-viewer src="${theme.berrySrc}" ${berry.dataset.orbit} style="width:100%; height:100%;"></model-viewer>`;
+                        }
                         heroCenter.style.zIndex = 50;
                     }
                 })
