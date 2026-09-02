@@ -1568,6 +1568,7 @@
             stoney: {
                 inner: '#8c5311', mid: '#4d2d09', outer: '#140c02',
                 name: 'Stoney Tangawizi', modelTexture: 'stoney',
+                flatLabel: 'assets/stoney_label.png',
                 berryType: 'emoji', berrySrc: '🍋‍🟩',
                 thumb: 'assets/stoney_can_gen.png',
                 thumbStyle: ''
@@ -1575,6 +1576,7 @@
             mirinda_pine: {
                 inner: '#8a7a0b', mid: '#4e4604', outer: '#141201',
                 name: 'Mirinda Pineapple', modelTexture: 'mirinda_pine',
+                flatLabel: 'assets/mirinda_pine_label.png',
                 berryType: 'emoji', berrySrc: '🍍',
                 thumb: 'assets/mirinda_pineapple.png',
                 thumbStyle: ''
@@ -1582,6 +1584,7 @@
             mirinda_apple: {
                 inner: '#2e8a0b', mid: '#184e04', outer: '#051401',
                 name: 'Mirinda Apple', modelTexture: 'mirinda_apple',
+                flatLabel: 'assets/mirinda_apple_label.png',
                 berryType: 'emoji', berrySrc: '🍏',
                 thumb: 'assets/mirinda_apple.png',
                 thumbStyle: ''
@@ -1675,52 +1678,52 @@
 
         async function generateTexture(theme) {
             return new Promise((resolve) => {
+                // If there's no flat label provided, fallback to standard gradient
+                if (!theme.flatLabel) {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 2048;
+                    canvas.height = 2048;
+                    const ctx = canvas.getContext('2d');
+                    const grad = ctx.createLinearGradient(0, 0, 0, 2048);
+                    grad.addColorStop(0, theme.inner);
+                    grad.addColorStop(0.5, theme.outer);
+                    grad.addColorStop(1, theme.inner);
+                    ctx.fillStyle = grad;
+                    ctx.fillRect(0, 0, 2048, 2048);
+                    resolve(canvas.toDataURL('image/png'));
+                    return;
+                }
+
+                // If user provides a flat label, map it perfectly to the 3D UVs
                 const canvas = document.createElement('canvas');
                 canvas.width = 2048;
                 canvas.height = 2048;
                 const ctx = canvas.getContext('2d');
                 
-                // Draw a shiny metallic gradient for the bare aluminum can
-                const grad = ctx.createLinearGradient(0, 0, 0, 2048);
-                grad.addColorStop(0, theme.inner);
-                grad.addColorStop(0.5, theme.outer);
-                grad.addColorStop(1, theme.inner);
-                ctx.fillStyle = grad;
-                ctx.fillRect(0, 0, 2048, 2048);
-
-                ctx.save();
-                ctx.translate(1024, 1024);
-                ctx.rotate(-Math.PI / 2); // Rotate to wrap horizontally
-
-                // Imprint the text directly onto the texture (no images of cans)
-                ctx.fillStyle = 'white';
-                ctx.shadowColor = 'rgba(0,0,0,0.5)';
-                ctx.shadowBlur = 10;
-                ctx.shadowOffsetX = 5;
-                ctx.shadowOffsetY = 5;
+                const labelImg = new Image();
+                labelImg.crossOrigin = "anonymous";
+                labelImg.src = theme.flatLabel;
                 
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
+                labelImg.onload = () => {
+                    ctx.save();
+                    ctx.translate(1024, 1024);
+                    // The 3D model wraps the texture such that X=0 is the top of the can.
+                    // We rotate -90 degrees so the top of the user's label points to X=0.
+                    ctx.rotate(-Math.PI / 2);
+                    
+                    // Draw the user's label to fill the entire unrolled cylinder surface
+                    ctx.drawImage(labelImg, -1024, -1024, 2048, 2048);
+                    
+                    ctx.restore();
+                    resolve(canvas.toDataURL('image/png'));
+                };
                 
-                // Title
-                ctx.font = '900 200px sans-serif';
-                ctx.fillText(theme.name.split(' ')[0], 0, -100);
-                
-                // Subtitle
-                if (theme.name.split(' ').length > 1) {
-                    ctx.font = '800 100px sans-serif';
-                    ctx.fillText(theme.name.split(' ').slice(1).join(' '), 0, 100);
-                }
-
-                // Barcode / extra details to look realistic
-                ctx.font = '400 60px sans-serif';
-                ctx.fillText('330ml ℮', 0, 300);
-                ctx.fillText('|||| || |||||| | |||', 0, 450); // Fake barcode
-                ctx.font = '300 30px sans-serif';
-                ctx.fillText('MADE IN UGANDA', 0, 520);
-                
-                ctx.restore();
-                resolve(canvas.toDataURL('image/png'));
+                labelImg.onerror = () => {
+                    // Fallback if image not found
+                    ctx.fillStyle = theme.mid;
+                    ctx.fillRect(0, 0, 2048, 2048);
+                    resolve(canvas.toDataURL('image/png'));
+                };
             });
         }
 
