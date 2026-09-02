@@ -535,6 +535,12 @@
             pointer-events: none;
         }
 
+        .card img.square-can {
+            width: 200px;
+            margin-top: -6rem;
+            margin-left: -35px;
+        }
+
         .card:hover img {
             transform: translateY(-28px) rotate(-12deg) scale(1.15) !important;
         }
@@ -1247,7 +1253,7 @@
                         <!-- Stoney Tangawizi -->
                         <div class="card" data-flavor="stoney" onclick="selectFlavor('stoney')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="assets/stoney_can_gen.jpg" style="mix-blend-mode: multiply; filter: brightness(1.2);" alt="Stoney Tangawizi Can">
+                            <img src="assets/stoney_can_gen.png" class="square-can" alt="Stoney Tangawizi Can">
                             <div class="card-info">
                                 <span>Stoney Ginger</span>
                                 <span>UGX 3,000</span>
@@ -1257,7 +1263,7 @@
                         <!-- Mirinda Pineapple -->
                         <div class="card" data-flavor="mirinda_pine" onclick="selectFlavor('mirinda_pine')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="assets/mirinda_pineapple.jpg" style="mix-blend-mode: multiply; filter: brightness(1.2);" alt="Mirinda Pineapple Can">
+                            <img src="assets/mirinda_pineapple.png" class="square-can" alt="Mirinda Pineapple Can">
                             <div class="card-info">
                                 <span>Mirinda Pineapple</span>
                                 <span>UGX 3,000</span>
@@ -1267,7 +1273,7 @@
                         <!-- Mirinda Apple -->
                         <div class="card" data-flavor="mirinda_apple" onclick="selectFlavor('mirinda_apple')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="assets/mirinda_apple.jpg" style="mix-blend-mode: multiply; filter: brightness(1.2);" alt="Mirinda Apple Can">
+                            <img src="assets/mirinda_apple.png" class="square-can" alt="Mirinda Apple Can">
                             <div class="card-info">
                                 <span>Mirinda Apple</span>
                                 <span>UGX 3,000</span>
@@ -1558,22 +1564,22 @@
                 inner: '#8c5311', mid: '#4d2d09', outer: '#140c02',
                 name: 'Stoney Tangawizi', modelTexture: 'stoney',
                 berryType: 'emoji', berrySrc: '🍋‍🟩',
-                thumb: 'assets/stoney_can_gen.jpg',
-                thumbStyle: 'mix-blend-mode: multiply; filter: brightness(1.2);'
+                thumb: 'assets/stoney_can_gen.png',
+                thumbStyle: ''
             },
             mirinda_pine: {
                 inner: '#8a7a0b', mid: '#4e4604', outer: '#141201',
                 name: 'Mirinda Pineapple', modelTexture: 'mirinda_pine',
                 berryType: 'emoji', berrySrc: '🍍',
-                thumb: 'assets/mirinda_pineapple.jpg',
-                thumbStyle: 'mix-blend-mode: multiply; filter: brightness(1.2);'
+                thumb: 'assets/mirinda_pineapple.png',
+                thumbStyle: ''
             },
             mirinda_apple: {
                 inner: '#2e8a0b', mid: '#184e04', outer: '#051401',
                 name: 'Mirinda Apple', modelTexture: 'mirinda_apple',
                 berryType: 'emoji', berrySrc: '🍏',
-                thumb: 'assets/mirinda_apple.jpg',
-                thumbStyle: 'mix-blend-mode: multiply; filter: brightness(1.2);'
+                thumb: 'assets/mirinda_apple.png',
+                thumbStyle: ''
             },
             dew: {
                 inner: '#4c8a0b', mid: '#284e04', outer: '#0a1401',
@@ -1644,6 +1650,43 @@
             }
         }
 
+        function generateTexture(theme) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1024;
+            canvas.height = 1024;
+            const ctx = canvas.getContext('2d');
+            
+            // Draw a shiny metallic gradient
+            const grad = ctx.createLinearGradient(0, 0, 0, 1024);
+            grad.addColorStop(0, theme.inner);
+            grad.addColorStop(0.5, theme.outer);
+            grad.addColorStop(1, theme.inner);
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 1024, 1024);
+
+            ctx.fillStyle = 'white';
+            ctx.shadowColor = 'rgba(0,0,0,0.5)';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetX = 5;
+            ctx.shadowOffsetY = 5;
+            
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            ctx.font = '900 130px sans-serif';
+            ctx.fillText(theme.name.split(' ')[0], 512, 450);
+            
+            ctx.font = '800 80px sans-serif';
+            if (theme.name.split(' ').length > 1) {
+                ctx.fillText(theme.name.split(' ').slice(1).join(' '), 512, 580);
+            }
+            
+            ctx.font = '400 40px sans-serif';
+            ctx.fillText('330ml ℮', 512, 700);
+
+            return canvas.toDataURL('image/png');
+        }
+
         async function switchFlavorAnimation(key) {
             if (isSwitching) return;
             isSwitching = true;
@@ -1658,7 +1701,8 @@
             else {
                 if (!window.textureCache) window.textureCache = {};
                 if (!window.textureCache[theme.modelTexture]) {
-                    window.textureCache[theme.modelTexture] = await modelViewer.createTexture(theme.thumb);
+                    const dataUrl = generateTexture(theme);
+                    window.textureCache[theme.modelTexture] = await modelViewer.createTexture(dataUrl);
                 }
                 targetTexture = window.textureCache[theme.modelTexture];
             }
