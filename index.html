@@ -524,7 +524,7 @@
             letter-spacing: 0.05em;
         }
 
-        .card img {
+        .card img, .card model-viewer {
             width: 130px;
             height: auto;
             margin-top: -7.5rem;
@@ -535,13 +535,18 @@
             pointer-events: none;
         }
 
+        .card model-viewer {
+            height: 250px;
+            --poster-color: transparent;
+        }
+
         .card img.square-can {
             width: 200px;
             margin-top: -6rem;
             margin-left: -35px;
         }
 
-        .card:hover img {
+        .card:hover img, .card:hover model-viewer {
             transform: translateY(-28px) rotate(-12deg) scale(1.15) !important;
         }
 
@@ -1253,7 +1258,7 @@
                         <!-- Stoney Tangawizi -->
                         <div class="card" data-flavor="stoney" onclick="selectFlavor('stoney')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="assets/stoney_can_gen.png" class="square-can" alt="Stoney Tangawizi Can">
+                            <model-viewer class="carousel-3d" data-theme="stoney" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/deit_soda2.glb" environment-image="neutral" exposure="1.5" interaction-prompt="none" camera-orbit="-20deg 85deg 105%" shadow-intensity="0" disable-zoom disable-pan></model-viewer>
                             <div class="card-info">
                                 <span>Stoney Ginger</span>
                                 <span>UGX 3,000</span>
@@ -1263,7 +1268,7 @@
                         <!-- Mirinda Pineapple -->
                         <div class="card" data-flavor="mirinda_pine" onclick="selectFlavor('mirinda_pine')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="assets/mirinda_pineapple.png" class="square-can" alt="Mirinda Pineapple Can">
+                            <model-viewer class="carousel-3d" data-theme="mirinda_pine" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/deit_soda2.glb" environment-image="neutral" exposure="1.5" interaction-prompt="none" camera-orbit="-20deg 85deg 105%" shadow-intensity="0" disable-zoom disable-pan></model-viewer>
                             <div class="card-info">
                                 <span>Mirinda Pineapple</span>
                                 <span>UGX 3,000</span>
@@ -1273,7 +1278,7 @@
                         <!-- Mirinda Apple -->
                         <div class="card" data-flavor="mirinda_apple" onclick="selectFlavor('mirinda_apple')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="assets/mirinda_apple.png" class="square-can" alt="Mirinda Apple Can">
+                            <model-viewer class="carousel-3d" data-theme="mirinda_apple" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/deit_soda2.glb" environment-image="neutral" exposure="1.5" interaction-prompt="none" camera-orbit="-20deg 85deg 105%" shadow-intensity="0" disable-zoom disable-pan></model-viewer>
                             <div class="card-info">
                                 <span>Mirinda Apple</span>
                                 <span>UGX 3,000</span>
@@ -1283,7 +1288,7 @@
                         <!-- Mountain Dew -->
                         <div class="card" data-flavor="dew" onclick="selectFlavor('dew')">
                             <span class="card-tag">330ML CAN</span>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Mountain_Dew_can.png/320px-Mountain_Dew_can.png" alt="Mountain Dew Can">
+                            <model-viewer class="carousel-3d" data-theme="dew" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/deit_soda2.glb" environment-image="neutral" exposure="1.5" interaction-prompt="none" camera-orbit="-20deg 85deg 105%" shadow-intensity="0" disable-zoom disable-pan></model-viewer>
                             <div class="card-info">
                                 <span>Mountain Dew</span>
                                 <span>UGX 3,000</span>
@@ -1609,6 +1614,24 @@
             } catch (e) { console.error("Texture preload failed", e); }
         });
 
+        document.querySelectorAll('.carousel-3d').forEach((mv) => {
+            mv.addEventListener('load', async () => {
+                const themeKey = mv.dataset.theme;
+                const theme = flavorThemes[themeKey];
+                try {
+                    const texDataUrl = generateTexture(theme);
+                    const tex = await mv.createTexture(texDataUrl);
+                    if (mv.model && tex) {
+                        mv.model.materials.forEach(mat => {
+                            if (mat.pbrMetallicRoughness.baseColorTexture) {
+                                mat.pbrMetallicRoughness.baseColorTexture.setTexture(tex);
+                            }
+                        });
+                    }
+                } catch(e) { console.error(e); }
+            });
+        });
+
         // Toast feedback
         function showToast(msg) {
             toast.textContent = msg;
@@ -1664,6 +1687,10 @@
             ctx.fillStyle = grad;
             ctx.fillRect(0, 0, 1024, 1024);
 
+            ctx.save();
+            ctx.translate(512, 512);
+            ctx.rotate(Math.PI / 2);
+
             ctx.fillStyle = 'white';
             ctx.shadowColor = 'rgba(0,0,0,0.5)';
             ctx.shadowBlur = 10;
@@ -1674,15 +1701,14 @@
             ctx.textBaseline = 'middle';
             
             ctx.font = '900 130px sans-serif';
-            ctx.fillText(theme.name.split(' ')[0], 512, 450);
+            ctx.fillText(theme.name.split(' ')[0], 0, -40);
             
-            ctx.font = '800 80px sans-serif';
             if (theme.name.split(' ').length > 1) {
-                ctx.fillText(theme.name.split(' ').slice(1).join(' '), 512, 580);
+                ctx.font = '800 60px sans-serif';
+                ctx.fillText(theme.name.split(' ').slice(1).join(' '), 0, 60);
             }
             
-            ctx.font = '400 40px sans-serif';
-            ctx.fillText('330ml ℮', 512, 700);
+            ctx.restore();
 
             return canvas.toDataURL('image/png');
         }
