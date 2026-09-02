@@ -1619,7 +1619,7 @@
                 const themeKey = mv.dataset.theme;
                 const theme = flavorThemes[themeKey];
                 try {
-                    const texDataUrl = generateTexture(theme);
+                    const texDataUrl = await generateTexture(theme);
                     const tex = await mv.createTexture(texDataUrl);
                     if (mv.model && tex) {
                         mv.model.materials.forEach(mat => {
@@ -1673,44 +1673,43 @@
             }
         }
 
-        function generateTexture(theme) {
-            const canvas = document.createElement('canvas');
-            canvas.width = 1024;
-            canvas.height = 1024;
-            const ctx = canvas.getContext('2d');
-            
-            // Draw a shiny metallic gradient
-            const grad = ctx.createLinearGradient(0, 0, 0, 1024);
-            grad.addColorStop(0, theme.inner);
-            grad.addColorStop(0.5, theme.outer);
-            grad.addColorStop(1, theme.inner);
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, 1024, 1024);
+        async function generateTexture(theme) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                canvas.width = 2048;
+                canvas.height = 2048;
+                const ctx = canvas.getContext('2d');
+                
+                // Draw a shiny metallic gradient
+                const grad = ctx.createLinearGradient(0, 0, 0, 2048);
+                grad.addColorStop(0, theme.inner);
+                grad.addColorStop(0.5, theme.outer);
+                grad.addColorStop(1, theme.inner);
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, 2048, 2048);
 
-            ctx.save();
-            ctx.translate(512, 512);
-            ctx.rotate(Math.PI / 2);
-
-            ctx.fillStyle = 'white';
-            ctx.shadowColor = 'rgba(0,0,0,0.5)';
-            ctx.shadowBlur = 10;
-            ctx.shadowOffsetX = 5;
-            ctx.shadowOffsetY = 5;
-            
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            
-            ctx.font = '900 130px sans-serif';
-            ctx.fillText(theme.name.split(' ')[0], 0, -40);
-            
-            if (theme.name.split(' ').length > 1) {
-                ctx.font = '800 60px sans-serif';
-                ctx.fillText(theme.name.split(' ').slice(1).join(' '), 0, 60);
-            }
-            
-            ctx.restore();
-
-            return canvas.toDataURL('image/png');
+                const stickerImg = new Image();
+                stickerImg.crossOrigin = "anonymous";
+                stickerImg.src = theme.thumb;
+                stickerImg.onload = () => {
+                    ctx.save();
+                    ctx.translate(1024, 1024);
+                    // Rotate -90 deg so top of sticker points to X=0 (top of can)
+                    ctx.rotate(-Math.PI / 2);
+                    
+                    // The sticker is a square PNG of the can. 
+                    // Draw it large in the center of the front face.
+                    const sw = 1400;
+                    const sh = 1400;
+                    ctx.drawImage(stickerImg, -sw/2, -sh/2 - 100, sw, sh);
+                    
+                    ctx.restore();
+                    resolve(canvas.toDataURL('image/png'));
+                };
+                stickerImg.onerror = () => {
+                    resolve(canvas.toDataURL('image/png'));
+                };
+            });
         }
 
         async function switchFlavorAnimation(key) {
@@ -1727,7 +1726,7 @@
             else {
                 if (!window.textureCache) window.textureCache = {};
                 if (!window.textureCache[theme.modelTexture]) {
-                    const dataUrl = generateTexture(theme);
+                    const dataUrl = await generateTexture(theme);
                     window.textureCache[theme.modelTexture] = await modelViewer.createTexture(dataUrl);
                 }
                 targetTexture = window.textureCache[theme.modelTexture];
