@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diet Soda | Pure Zero Refreshment</title>
-    <meta name="description" content="Experience the crisp, clean taste of Diet Soda. Zero sugar, zero compromise.">
+    <title>Uganda Canned Sodas | Pure Chilled Refreshment</title>
+    <meta name="description" content="Order ice-cold 330ml canned sodas in Uganda. Coca-Cola, Sprite, Stoney Tangawizi, Fanta & more with instant MTN MoMo & Airtel Money checkout.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;500&family=Manrope:wght@400;700&family=Galada&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;600;700;800&family=Galada&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
         :root {
             --bg-color: #0a0a0a;
             --text-color: #ffffff;
-            --accent-color: #ffffff;
-            --muted-color: rgba(255, 255, 255, 0.7);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-color: #fbcfe8;
+            --muted-color: rgba(255, 255, 255, 0.75);
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.12);
             --font-main: 'Inter', sans-serif;
             --font-heading: 'Galada', cursive;
+            --font-sub: 'Manrope', sans-serif;
 
-            /* Dynamic Background Variables */
-            --bg-inner: #0b8a78;
-            --bg-mid: #044e3b;
-            --bg-outer: #011411;
+            /* Dynamic Background Variables - Default Sprite Lime Theme */
+            --bg-inner: #0b8a4f;
+            --bg-mid: #044e29;
+            --bg-outer: #011409;
+            --theme-accent: #fbcfe8;
         }
 
         * {
@@ -37,17 +39,12 @@
             background: radial-gradient(circle at center, var(--bg-inner) 0%, var(--bg-mid) 50%, var(--bg-outer) 100%);
             color: var(--text-color);
             font-family: var(--font-main);
-            overflow: hidden; /* Remove scroll */
+            overflow: hidden;
             height: 100vh;
             transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        body.blue-theme {
-            --bg-inner: #0b4f8a;
-            --bg-mid: #04294e;
-            --bg-outer: #010c14;
-        }
-
+        /* Bubbles Container */
         #bubbles-container {
             position: fixed;
             top: 0;
@@ -69,19 +66,20 @@
                 transform: translateY(0) translateX(0) rotate(0deg);
                 opacity: 0;
             }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
+            10% { opacity: 0.45; }
+            90% { opacity: 0.45; }
             100% {
-                transform: translateY(-110vh) translateX(30px) rotate(360deg);
+                transform: translateY(-110vh) translateX(35px) rotate(360deg);
                 opacity: 0;
             }
         }
 
+        /* Header Navigation */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 4%;
+            padding: 1.8rem 4%;
             position: fixed;
             top: 0;
             width: 100%;
@@ -91,15 +89,33 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-family: var(--font-heading);
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo svg {
+            color: #fbcfe8;
+        }
+
+        .logo-tag {
+            font-family: var(--font-sub);
+            font-size: 0.65rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #fbcfe8;
         }
 
         .nav {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
             background: var(--glass-bg);
             padding: 0.4rem;
             border-radius: 100px;
@@ -110,47 +126,52 @@
             position: relative;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
 
         .nav-item {
-            font-family: 'Manrope', sans-serif;
+            font-family: var(--font-sub);
             color: var(--muted-color);
             text-decoration: none;
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
             padding: 0.5rem 1.2rem;
             border-radius: 100px;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .nav-item:hover,
         .nav-item.active {
             background: #fbcfe8;
             color: #011d17;
+            transform: translateY(-1px);
         }
 
         .contact-btn {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.55);
             color: white;
-            border: none;
-            padding: 0.9rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.85rem 1.8rem;
             border-radius: 100px;
             font-weight: 600;
             font-size: 0.85rem;
+            font-family: var(--font-sub);
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: none;
+            backdrop-filter: blur(10px);
         }
 
         .contact-btn:hover {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             transform: translateY(-2px);
-            box-shadow: none;
+            border-color: #fbcfe8;
+            color: #fbcfe8;
         }
 
+        /* Hero Container */
         .hero {
             height: 100vh;
             display: flex;
@@ -163,7 +184,7 @@
         .hero-content {
             display: flex;
             justify-content: space-between;
-            align-items: stretch; /* Stretch columns to full height */
+            align-items: stretch;
             width: 100%;
             max-width: 100%;
             padding: 0;
@@ -175,8 +196,8 @@
         .main-title,
         .side-title {
             font-family: var(--font-heading);
-            font-size: clamp(5rem, 10vw, 12rem);
-            line-height: 0.8;
+            font-size: clamp(4.5rem, 8.5vw, 10.5rem);
+            line-height: 0.82;
             font-weight: 400;
             text-transform: none;
             white-space: nowrap;
@@ -188,6 +209,7 @@
             color: var(--text-color);
         }
 
+        /* Leaves Far Background */
         .leaves-container {
             position: absolute;
             top: 0;
@@ -195,7 +217,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1; /* Even further behind */
+            z-index: -1;
             transition: transform 0.1s ease-out;
         }
 
@@ -213,53 +235,74 @@
         .l3 { top: 70%; left: 75%; width: 80px; height: 80px; }
         .l4 { top: 85%; left: 20%; width: 120px; height: 120px; opacity: 0.3; }
 
+        /* Left Hero Column */
         .hero-left {
             display: flex;
             flex-direction: column;
             height: 100%;
-            padding: 6rem 0;
-            gap: 2rem;
+            padding: 6rem 0 4rem 0;
+            gap: 1.8rem;
             z-index: 100;
+            max-width: 480px;
         }
 
-        @keyframes fadeInEntry {
-            to { opacity: 1; transform: none; }
+        .ug-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.35rem 0.9rem;
+            border-radius: 100px;
+            width: fit-content;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #fbcfe8;
+            backdrop-filter: blur(10px);
+        }
+
+        .ug-flag {
+            font-size: 1rem;
         }
 
         .description {
             color: var(--muted-color);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.6;
-            max-width: 400px;
+            max-width: 420px;
         }
 
         .primary-btn {
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             color: white;
-            border: none;
-            padding: 0.4rem 0.4rem 0.4rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 0.4rem 0.4rem 0.4rem 1.6rem;
             border-radius: 100px;
             font-weight: 700;
+            font-size: 0.95rem;
+            font-family: var(--font-sub);
             cursor: pointer;
             width: fit-content;
-            transition: all 0.3s ease;
-            box-shadow: none;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .primary-btn:hover {
-            background: rgba(0, 0, 0, 0.7);
-            transform: translateY(-3px);
-            box-shadow: none;
+            background: rgba(0, 0, 0, 0.85);
+            transform: translateY(-3px) scale(1.02);
+            border-color: #fbcfe8;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(251, 207, 232, 0.3);
         }
 
         .plus-icon {
             background: #fbcfe8;
             color: #011d17;
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -267,15 +310,26 @@
             font-size: 1.4rem;
             font-weight: 900;
             line-height: 1;
-            padding-bottom: 2px; /* Compensate for baseline shift */
+            padding-bottom: 2px;
             border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .primary-btn:hover .plus-icon {
+            transform: rotate(90deg);
         }
 
         .award-badge {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-top: auto; /* Push to bottom */
+            margin-top: auto;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .award-badge:hover {
+            opacity: 0.9;
         }
 
         .award-icon {
@@ -283,16 +337,19 @@
             height: 48px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #fbcfe8;
+            backdrop-filter: blur(10px);
         }
 
         .award-text { display: flex; flex-direction: column; }
-        .award-title { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--muted-color); }
-        .award-subtitle { font-size: 0.85rem; font-weight: 600; }
+        .award-title { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--muted-color); font-weight: 600; }
+        .award-subtitle { font-size: 0.85rem; font-weight: 700; color: #ffffff; }
 
+        /* 3D Center Can Product */
         .hero-center {
             display: flex;
             justify-content: center;
@@ -306,19 +363,19 @@
             opacity: 0;
             animation: fadeIn 1.5s ease-out 0.3s forwards, float 6s ease-in-out infinite;
             pointer-events: none;
-            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
         }
 
         @keyframes fadeIn { to { opacity: 1; } }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-18px); }
         }
 
         .main-product-3d {
-            width: 80vw;
-            height: 80vh;
+            width: 78vw;
+            height: 78vh;
             outline: none;
             --progress-bar-color: transparent;
             --poster-color: transparent;
@@ -332,6 +389,7 @@
 
         .main-product-3d[camera-controls] { pointer-events: auto; }
 
+        /* Berries / Floating Objects Containers */
         .berries-container {
             position: absolute;
             top: 0;
@@ -339,7 +397,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 110; /* Above text (100) and can (50) */
+            z-index: 110;
             transition: transform 0.1s ease-out;
         }
 
@@ -350,7 +408,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0; /* Behind everything */
+            z-index: 0;
             transition: transform 0.1s ease-out;
         }
 
@@ -360,22 +418,21 @@
             height: 120px;
             outline: none;
             --progress-bar-color: transparent;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
             transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .berry.no-animation { animation: none !important; }
+        .b1 { top: 22%; left: 30%; width: 220px; height: 220px; }
+        .b2 { top: 62%; left: 40%; width: 100px; height: 100px; }
+        .b3 { top: 28%; left: 62%; width: 240px; height: 240px; }
+        .b4 { top: 14%; left: 48%; width: 140px; height: 140px; }
+        .b5 { top: 76%; left: 18%; width: 120px; height: 120px; }
+        .b6 { top: 46%; left: 74%; width: 180px; height: 180px; }
+        .b7 { top: 15%; left: 38%; width: 80px; height: 80px; opacity: 0.7; }
+        .b8 { top: 52%; left: 56%; width: 70px; height: 70px; opacity: 0.6; }
+        .b9 { top: 82%; left: 35%; width: 75px; height: 75px; opacity: 0.7; }
 
-        .b1 { top: 25%; left: 30%; width: 220px; height: 220px; }
-        .b2 { top: 60%; left: 42%; width: 100px; height: 100px; }
-        .b3 { top: 30%; left: 62%; width: 250px; height: 250px; }
-        .b4 { top: 15%; left: 48%; width: 140px; height: 140px; }
-        .b5 { top: 75%; left: 20%; width: 120px; height: 120px; }
-        .b6 { top: 45%; left: 75%; width: 180px; height: 180px; }
-        .b7 { top: 15%; left: 40%; width: 80px; height: 80px; opacity: 0.7; }
-        .b8 { top: 50%; left: 55%; width: 70px; height: 70px; opacity: 0.6; }
-        .b9 { top: 80%; left: 35%; width: 75px; height: 75px; opacity: 0.7; }
-
+        /* Right Hero Column & Canned Soda Carousel */
         .hero-right {
             display: flex;
             flex-direction: column;
@@ -383,143 +440,709 @@
             align-items: flex-end;
             text-align: right;
             height: 100%;
-            padding: 6rem 0;
+            padding: 6rem 0 4rem 0;
             z-index: 100;
-            width: 450px;
+            width: 480px;
             pointer-events: none;
-        }
-
-        @keyframes fadeInLeft {
-            to { opacity: 1; transform: translateX(0); }
         }
 
         .product-carousel {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.2rem;
             align-items: flex-end;
-            pointer-events: auto; /* Enable interaction */
+            pointer-events: auto;
+            max-width: 100%;
         }
 
-        .carousel-cards { display: flex; gap: 1rem; }
+        .carousel-cards-wrapper {
+            display: flex;
+            gap: 0.9rem;
+            overflow-x: auto;
+            padding: 0.5rem 0.2rem;
+            max-width: 460px;
+            scrollbar-width: none;
+        }
+        .carousel-cards-wrapper::-webkit-scrollbar { display: none; }
 
         .card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            padding: 1rem;
-            padding-top: 5rem;
-            border-radius: 28px;
+            padding: 0.9rem;
+            padding-top: 4.6rem;
+            border-radius: 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1.2rem;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            width: 135px;
+            min-width: 125px;
+            width: 125px;
             position: relative;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             text-align: center;
+            flex-shrink: 0;
         }
 
         .card:hover {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.14);
             border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px);
         }
 
         .card.active {
             border-color: #fbcfe8;
-            border-width: 1px;
-            background: var(--glass-bg);
-            box-shadow: none;
+            border-width: 1.5px;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 25px rgba(251, 207, 232, 0.2);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.55rem;
+            font-weight: 800;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fbcfe8;
+            padding: 2px 6px;
+            border-radius: 10px;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
         }
 
         .card img {
-            width: 140px;
+            width: 130px;
             height: auto;
-            margin-top: -8rem;
-            filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.5));
+            margin-top: -7.5rem;
+            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
             display: block;
             will-change: transform;
-            pointer-events: none; /* Mouse passes through image to trigger card hover */
+            pointer-events: none;
         }
 
         .card:hover img {
-            transform: translateY(-30px) rotate(-12deg) scale(1.15) !important;
+            transform: translateY(-28px) rotate(-12deg) scale(1.15) !important;
         }
 
         .card-info {
             display: flex;
             flex-direction: column;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             width: 100%;
             word-wrap: break-word;
+            gap: 2px;
         }
 
-        .card-info span:first-child { font-weight: 600; }
-        .card-info span:last-child { color: var(--muted-color); }
+        .card-info span:first-child { font-weight: 700; color: #ffffff; }
+        .card-info span:last-child { color: #fbcfe8; font-weight: 800; font-size: 0.8rem; }
 
-        .carousel-nav { display: flex; gap: 1rem; }
+        .carousel-nav {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
 
         .nav-arrow {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             color: white;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
         }
 
-        .nav-arrow:hover { background: rgba(255, 255, 255, 0.1); }
+        .nav-arrow:hover {
+            background: #fbcfe8;
+            color: #011d17;
+            transform: scale(1.08);
+        }
 
         .side-title { align-self: flex-end; text-align: right; }
 
-        @keyframes shine {
-            from { transform: translateX(-100%) rotate(45deg); }
-            to { transform: translateX(200%) rotate(45deg); }
+        /* Universal Glassmorphic Modal & Drawer Framework */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+            padding: 1.5rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: rgba(12, 22, 28, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            width: 100%;
+            max-width: 580px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 2.2rem;
+            color: white;
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .modal-close:hover {
+            background: #fbcfe8;
+            color: #011d17;
+            transform: rotate(90deg);
+        }
+
+        .modal-header-tag {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #fbcfe8;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            font-family: var(--font-sub);
+            line-height: 1.2;
+        }
+
+        /* Glass Form Elements */
+        .glass-input, .glass-select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            padding: 0.9rem 1.2rem;
+            color: white;
+            font-size: 0.9rem;
+            font-family: var(--font-main);
+            outline: none;
+            transition: border 0.3s, background 0.3s;
+            margin-bottom: 0.9rem;
+        }
+
+        .glass-input:focus, .glass-select:focus {
+            border-color: #fbcfe8;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(251, 207, 232, 0.2);
+        }
+
+        .glass-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Shop & MoMo Checkout Styles */
+        .shop-flavor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .shop-flavor-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 0.7rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .shop-flavor-item:hover,
+        .shop-flavor-item.active {
+            border-color: #fbcfe8;
+            background: rgba(251, 207, 232, 0.15);
+            color: #fbcfe8;
+            transform: translateY(-2px);
+        }
+
+        .shop-pack-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .pack-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 0.6rem 0.3rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-align: center;
+        }
+
+        .pack-btn span {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--muted-color);
+            font-weight: 500;
+        }
+
+        .pack-btn.active, .pack-btn:hover {
+            border-color: #fbcfe8;
+            background: rgba(251, 207, 232, 0.2);
+            color: #ffffff;
+        }
+
+        .shop-qty-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.8rem 1.2rem;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #fbcfe8;
+            color: #011d17;
+        }
+
+        .qty-num {
+            font-size: 1.1rem;
+            font-weight: 800;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .shop-total-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px dashed rgba(251, 207, 232, 0.4);
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+        }
+
+        .shop-total-val {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #fbcfe8;
+            letter-spacing: 0.02em;
+        }
+
+        .payment-channel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .pay-channel-card {
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.9rem;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .pay-channel-card.mtn.active, .pay-channel-card.mtn:hover {
+            border-color: #ffcc00;
+            background: rgba(255, 204, 0, 0.12);
+        }
+
+        .pay-channel-card.airtel.active, .pay-channel-card.airtel:hover {
+            border-color: #ff0000;
+            background: rgba(255, 0, 0, 0.12);
+        }
+
+        .channel-title {
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .channel-sub {
+            font-size: 0.7rem;
+            color: var(--muted-color);
+        }
+
+        .checkout-action-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #fbcfe8 0%, #f472b6 100%);
+            color: #011d17;
+            border: none;
+            padding: 1.1rem;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(244, 114, 182, 0.3);
+        }
+
+        .checkout-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(244, 114, 182, 0.5);
+        }
+
+        /* MoMo USSD & Payment Instructions Box */
+        .momo-pay-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .code-pill-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.7rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .copy-chip-btn {
+            background: #fbcfe8;
+            color: #011d17;
+            border: none;
+            padding: 0.35rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .copy-chip-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .ussd-steps {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            margin-top: 0.8rem;
+            padding-left: 1.2rem;
+        }
+
+        .ussd-steps li {
+            margin-bottom: 0.3rem;
+        }
+
+        .ussd-highlight {
+            color: #ffcc00;
+            font-weight: 800;
+        }
+        .ussd-highlight.airtel {
+            color: #ff4d4d;
+        }
+
+        /* QR Code & Call Verification Section */
+        .qr-section {
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .qr-placeholder {
+            width: 140px;
+            height: 140px;
+            margin: 0.6rem auto;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-placeholder svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .qr-scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+            animation: scanLine 2s infinite ease-in-out;
+        }
+
+        @keyframes scanLine {
+            0%, 100% { top: 5%; }
+            50% { top: 95%; }
+        }
+
+        .verification-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .admin-call-btn, .whatsapp-confirm-btn {
+            padding: 0.9rem;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .admin-call-btn {
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .whatsapp-confirm-btn {
+            background: #25d366;
+            color: white;
+        }
+
+        .admin-call-btn:hover, .whatsapp-confirm-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Rich Content Modals (Ingredients, Taste, Eco, Reviews) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 1rem;
+            border-radius: 16px;
+        }
+
+        .info-card h4 {
+            font-size: 0.9rem;
+            color: #fbcfe8;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .info-card p {
+            font-size: 0.8rem;
+            color: var(--muted-color);
+            line-height: 1.5;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.1rem;
+            border-radius: 16px;
+            margin-bottom: 0.8rem;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .review-stars {
+            color: #ffcc00;
+            font-size: 0.85rem;
+        }
+
+        .review-author {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .review-loc {
+            font-size: 0.7rem;
+            color: #fbcfe8;
+        }
+
+        .review-text {
+            font-size: 0.85rem;
+            color: var(--muted-color);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* Toast feedback */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(10, 20, 25, 0.92);
+            color: #fbcfe8;
+            border: 1px solid #fbcfe8;
+            padding: 0.75rem 1.6rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(15px);
+        }
+
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
 
         @media (max-width: 1200px) {
             .main-product-3d { width: 100vw; height: 60vh; top: 40%; }
-        }
-
-        @media (max-width: 1200px) {
-            .hero-content { grid-template-columns: 1fr; padding-top: 8rem; }
-            .hero-center { order: -1; }
-            .main-title, .side-title { font-size: 5rem; }
-            .hero-right { align-items: center; text-align: center; }
+            .hero-content { flex-direction: column; padding-top: 6rem; overflow-y: auto; }
+            .hero-center { order: -1; position: relative; height: 350px; }
+            .main-title, .side-title { font-size: 4.5rem; text-align: center; }
+            .hero-right, .hero-left { width: 100%; max-width: 100%; align-items: center; text-align: center; padding: 2rem 0; }
             .side-title { align-self: center; text-align: center; }
+            .product-carousel { align-items: center; }
+            .award-badge { margin: 1rem auto 0 auto; }
         }
     </style>
 </head>
 <body>
     <div id="bubbles-container"></div>
 
+    <!-- Header Navigation -->
     <header class="header">
-        <div class="logo">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <a href="#" class="logo" onclick="openHomeTab(event)">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
                 <path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
-            <span>Soda</span>
-        </div>
+            <span>Pure Soda</span>
+            <span class="logo-tag">UGANDA 🇺🇬</span>
+        </a>
         <nav class="nav glass">
-            <a href="#" class="nav-item active">Home</a>
-            <a href="#" class="nav-item">Ingredients</a>
-            <a href="#" class="nav-item">Taste</a>
-            <a href="#" class="nav-item">Eco</a>
-            <a href="#" class="nav-item">Reviews</a>
+            <a class="nav-item active" onclick="openHomeTab(event)">Home</a>
+            <a class="nav-item" onclick="openInfoModal('ingredients', event)">Ingredients</a>
+            <a class="nav-item" onclick="openInfoModal('taste', event)">Taste</a>
+            <a class="nav-item" onclick="openInfoModal('eco', event)">Eco</a>
+            <a class="nav-item" onclick="openInfoModal('reviews', event)">Reviews</a>
         </nav>
-        <button class="contact-btn">Contact Us</button>
+        <button class="contact-btn" onclick="openContactModal()">Contact Us</button>
     </header>
 
+    <!-- Main Hero -->
     <main class="hero">
         <div class="hero-content">
+            <!-- Background floating leaves -->
             <div class="leaves-container">
                 <model-viewer class="leaf l1" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 75deg 105%"></model-viewer>
                 <model-viewer class="leaf l2" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-30deg 60deg 105%"></model-viewer>
@@ -527,23 +1150,26 @@
                 <model-viewer class="leaf l4" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/leaves.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="10deg 45deg 105%"></model-viewer>
             </div>
 
+            <!-- Left column -->
             <div class="hero-left">
-                <h1 class="main-title large-animation-1">
-                    <span class="outline">Pure</span><br>
-                    Zero
+                <div class="ug-badge-pill">
+                    <span class="ug-flag">🇺🇬</span>
+                    <span>100% CHILLED 330ML CANS ONLY</span>
+                </div>
+                <h1 class="main-title">
+                    <span class="outline">Ice Cold</span><br>
+                    Refresh
                 </h1>
                 <p class="description">
-                    Unleash the crisp taste of zero sugar. <br>
-                    Refreshment redefined in every bubble — <br>
-                    all in one sleek design.
+                    Uganda's finest 330ml canned sodas. Delivered chilled in 30 minutes across Kampala. Pay easily with MTN MoMo or Airtel Money.
                 </p>
                 <div class="cta-group">
-                    <button class="primary-btn">
+                    <button class="primary-btn" onclick="openShopModal()">
                         Shop Now
                         <span class="plus-icon">+</span>
                     </button>
                 </div>
-                <div class="award-badge">
+                <div class="award-badge" onclick="openInfoModal('eco', event)">
                     <div class="award-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 15L15 18L19 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -551,26 +1177,29 @@
                         </svg>
                     </div>
                     <div class="award-text">
-                        <span class="award-title">DESIGN AWARDS</span>
-                        <span class="award-subtitle">PREMIUM BEVERAGE 2025</span>
+                        <span class="award-title">100% RECYCLABLE CAN</span>
+                        <span class="award-subtitle">KAMPALA GREEN INITIATIVE</span>
                     </div>
                 </div>
             </div>
 
+            <!-- Background berries -->
             <div class="berries-container-bg">
                 <model-viewer class="berry b7" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-20deg 110deg 105%"></model-viewer>
                 <model-viewer class="berry b8" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="160deg 45deg 105%"></model-viewer>
                 <model-viewer class="berry b9" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 20deg 105%"></model-viewer>
             </div>
 
+            <!-- Center 3D Soda Can -->
             <div class="hero-center">
-                <model-viewer id="product-model" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/deit_soda2.glb" alt="Diet Soda 3D Model" camera-controls
+                <model-viewer id="product-model" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/deit_soda2.glb" alt="Uganda Canned Soda 3D Model" camera-controls
                     disable-zoom shadow-intensity="0" environment-image="neutral" exposure="1.5"
                     interaction-prompt="none" camera-orbit="0deg 90deg 380%" field-of-view="30deg"
                     class="main-product-3d">
                 </model-viewer>
             </div>
 
+            <!-- Foreground Berries -->
             <div class="berries-container">
                 <model-viewer class="berry b1" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="45deg 120deg 105%"></model-viewer>
                 <model-viewer class="berry b2" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-120deg 45deg 105%"></model-viewer>
@@ -580,149 +1209,461 @@
                 <model-viewer class="berry b6" src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="80deg 75deg 105%"></model-viewer>
             </div>
 
+            <!-- Right Column with Uganda Canned Soda Carousel -->
             <div class="hero-right">
                 <div class="product-carousel">
-                    <div class="carousel-cards">
-                        <div class="card active" data-flavor="classic">
-                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" alt="Diet Classic">
+                    <div class="carousel-cards-wrapper" id="carouselWrapper">
+                        <!-- Sprite Lime (Default) -->
+                        <div class="card active" data-flavor="sprite" onclick="selectFlavor('sprite')">
+                            <span class="card-tag">330ML CAN</span>
+                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" alt="Sprite Lime Can">
                             <div class="card-info">
-                                <span>Diet Classic</span>
+                                <span>Sprite Lime</span>
                                 <span>UGX 3,000</span>
                             </div>
                         </div>
-                        <div class="card" data-flavor="blue">
-                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Blue%20Soda.png" alt="Zero Lime" style="filter: brightness(0.7);">
+
+                        <!-- Coca-Cola Original -->
+                        <div class="card" data-flavor="coke" onclick="selectFlavor('coke')">
+                            <span class="card-tag">330ML CAN</span>
+                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Blue%20Soda.png" style="filter: hue-rotate(140deg) saturate(1.8);" alt="Coca-Cola Can">
                             <div class="card-info">
-                                <span>Zero Lime</span>
+                                <span>Coca-Cola</span>
+                                <span>UGX 3,000</span>
+                            </div>
+                        </div>
+
+                        <!-- Stoney Tangawizi -->
+                        <div class="card" data-flavor="stoney" onclick="selectFlavor('stoney')">
+                            <span class="card-tag">330ML CAN</span>
+                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" style="filter: sepia(0.8) hue-rotate(340deg) saturate(2);" alt="Stoney Tangawizi Can">
+                            <div class="card-info">
+                                <span>Stoney Ginger</span>
+                                <span>UGX 3,000</span>
+                            </div>
+                        </div>
+
+                        <!-- Fanta Orange -->
+                        <div class="card" data-flavor="fanta" onclick="selectFlavor('fanta')">
+                            <span class="card-tag">330ML CAN</span>
+                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" style="filter: hue-rotate(40deg) saturate(2);" alt="Fanta Orange Can">
+                            <div class="card-info">
+                                <span>Fanta Orange</span>
+                                <span>UGX 3,000</span>
+                            </div>
+                        </div>
+
+                        <!-- Mountain Dew -->
+                        <div class="card" data-flavor="dew" onclick="selectFlavor('dew')">
+                            <span class="card-tag">330ML CAN</span>
+                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Green%20Soda.png" style="filter: hue-rotate(85deg) saturate(2.5);" alt="Mountain Dew Can">
+                            <div class="card-info">
+                                <span>Mountain Dew</span>
+                                <span>UGX 3,000</span>
+                            </div>
+                        </div>
+
+                        <!-- Pepsi Max -->
+                        <div class="card" data-flavor="pepsi" onclick="selectFlavor('pepsi')">
+                            <span class="card-tag">330ML CAN</span>
+                            <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/Blue%20Soda.png" alt="Pepsi Can">
+                            <div class="card-info">
+                                <span>Pepsi Max</span>
                                 <span>UGX 3,000</span>
                             </div>
                         </div>
                     </div>
+
                     <div class="carousel-nav">
-                        <button class="nav-arrow">←</button>
-                        <button class="nav-arrow">→</button>
+                        <button class="nav-arrow" onclick="cycleFlavor(-1)" title="Previous Canned Soda">←</button>
+                        <button class="nav-arrow" onclick="cycleFlavor(1)" title="Next Canned Soda">→</button>
                     </div>
                 </div>
-                <h2 class="side-title large-animation-1">
-                    <span class="outline">Refreshingly</span><br>
-                    Clean
+
+                <h2 class="side-title">
+                    <span class="outline">100% Cans</span><br>
+                    Crisp Fizz
                 </h2>
             </div>
         </div>
     </main>
 
-    <svg style="position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none;">
-        <filter id="frosted">
-            <feTurbulence type="fractalNoise" baseFrequency="0.0125" numOctaves="3" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="80" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-    </svg>
+    <!-- SHOP MODAL (Step 1: Flavor, Pack, Qty, Details & MoMo Selection) -->
+    <div id="shop-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeAllModals()">&times;</button>
+            <div class="modal-header-tag">🇺🇬 UGANDA EXPRESS CANNED DELIVERY</div>
+            <h3 class="modal-title">Order Canned Sodas</h3>
 
+            <!-- 1. Flavor Picker -->
+            <label style="font-size: 0.8rem; font-weight: 700; margin-bottom: 0.4rem; display: block; color: var(--muted-color);">Select Canned Flavor:</label>
+            <div class="shop-flavor-grid" id="flavorPickerGrid">
+                <div class="shop-flavor-item active" data-flavor="sprite" onclick="setOrderFlavor('Sprite Lime', this)">🌿 Sprite Lime</div>
+                <div class="shop-flavor-item" data-flavor="coke" onclick="setOrderFlavor('Coca-Cola Original', this)">❤️ Coca-Cola</div>
+                <div class="shop-flavor-item" data-flavor="stoney" onclick="setOrderFlavor('Stoney Tangawizi', this)">🔥 Stoney Ginger</div>
+                <div class="shop-flavor-item" data-flavor="fanta" onclick="setOrderFlavor('Fanta Orange', this)">🍊 Fanta Orange</div>
+                <div class="shop-flavor-item" data-flavor="dew" onclick="setOrderFlavor('Mountain Dew', this)">⚡ Mountain Dew</div>
+                <div class="shop-flavor-item" data-flavor="pepsi" onclick="setOrderFlavor('Pepsi Max', this)">🔵 Pepsi Max</div>
+            </div>
+
+            <!-- 2. Pack Size Selector -->
+            <label style="font-size: 0.8rem; font-weight: 700; margin-bottom: 0.4rem; display: block; color: var(--muted-color);">Select Pack Option:</label>
+            <div class="shop-pack-selector">
+                <button type="button" class="pack-btn active" onclick="setPack(1, 3000, this)">1 Can<span>UGX 3,000</span></button>
+                <button type="button" class="pack-btn" onclick="setPack(6, 17500, this)">6-Pack<span>UGX 17,500</span></button>
+                <button type="button" class="pack-btn" onclick="setPack(12, 34000, this)">12-Pack<span>UGX 34,000</span></button>
+                <button type="button" class="pack-btn" onclick="setPack(24, 66000, this)">24 Crate<span>UGX 66,000</span></button>
+            </div>
+
+            <!-- 3. Quantity Controls -->
+            <div class="shop-qty-row">
+                <span style="font-weight: 600; font-size: 0.9rem;">Quantity of Packs:</span>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="updateQty(-1)">−</button>
+                    <span class="qty-num" id="orderQtyVal">1</span>
+                    <button class="qty-btn" onclick="updateQty(1)">+</button>
+                </div>
+            </div>
+
+            <!-- 4. Total Banner -->
+            <div class="shop-total-banner">
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--muted-color);">Total Payable (Uganda Shillings)</div>
+                    <div id="orderSummaryText" style="font-size: 0.85rem; font-weight: 700; color: #ffffff;">1 × Sprite Lime (Single Can)</div>
+                </div>
+                <div class="shop-total-val" id="orderTotalVal">UGX 3,000</div>
+            </div>
+
+            <!-- 5. Delivery Details Form -->
+            <input type="text" id="custName" class="glass-input" placeholder="Your Full Name (e.g. Kenneth Kato)" required>
+            <input type="tel" id="custPhone" class="glass-input" placeholder="Phone / WhatsApp (+256 700 000 000)" required>
+            <input type="text" id="custLocation" class="glass-input" placeholder="Delivery Location (e.g. Kololo, Nakasero, Ntinda)" required>
+
+            <!-- 6. Mobile Money Payment Selector -->
+            <label style="font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem; display: block; color: var(--muted-color);">Choose Mobile Money Payment Method:</label>
+            <div class="payment-channel-grid">
+                <div class="pay-channel-card mtn active" id="payMtnCard" onclick="setPaymentMethod('mtn')">
+                    <div class="channel-title" style="color: #ffcc00;">
+                        <span>🟡</span> MTN MoMo
+                    </div>
+                    <div class="channel-sub">Dial *165*3# or QR Scan</div>
+                </div>
+                <div class="pay-channel-card airtel" id="payAirtelCard" onclick="setPaymentMethod('airtel')">
+                    <div class="channel-title" style="color: #ff4d4d;">
+                        <span>🔴</span> Airtel Money
+                    </div>
+                    <div class="channel-sub">Dial *185*9# or QR Scan</div>
+                </div>
+            </div>
+
+            <button type="button" class="checkout-action-btn" onclick="proceedToPaymentStep()">
+                <span>Proceed to Mobile Money Payment</span>
+                <span>→</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- PAYMENT INSTRUCTIONS MODAL (Step 2: USSD, Merchant Codes, QR & Admin Call) -->
+    <div id="payment-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeAllModals()">&times;</button>
+            <div class="modal-header-tag" id="paymentMethodTag">🟡 MTN MOMOPAY CHECKOUT</div>
+            <h3 class="modal-title" style="margin-bottom: 0.5rem;">Complete Mobile Money</h3>
+            <p style="font-size: 0.85rem; color: var(--muted-color); margin-bottom: 1.2rem;">
+                Follow the simple USSD steps or scan QR code on your phone to transfer payment.
+            </p>
+
+            <div class="shop-total-banner" style="background: rgba(251, 207, 232, 0.1); border-color: #fbcfe8;">
+                <div>
+                    <span style="font-size: 0.75rem; color: var(--muted-color);">Amount to Send</span>
+                    <div style="font-size: 0.85rem; font-weight: 700;" id="momoOrderRef">Order: Sprite (1 Can)</div>
+                </div>
+                <div class="shop-total-val" id="momoPayTotal">UGX 3,000</div>
+            </div>
+
+            <!-- MTN Payment Details Box -->
+            <div id="mtnDetailsBox" class="momo-pay-box">
+                <div class="code-pill-row">
+                    <div>
+                        <div style="font-size: 0.7rem; color: var(--muted-color);">MTN MoMoPay Merchant Code</div>
+                        <strong style="font-size: 1.1rem; color: #ffcc00;">884422</strong>
+                    </div>
+                    <button class="copy-chip-btn" onclick="copyText('884422', 'Merchant Code Copied!')">Copy Code</button>
+                </div>
+
+                <div class="code-pill-row">
+                    <div>
+                        <div style="font-size: 0.7rem; color: var(--muted-color);">Direct MoMo Number</div>
+                        <strong style="font-size: 1.05rem; color: #ffffff;">0770 123 456</strong>
+                    </div>
+                    <button class="copy-chip-btn" onclick="copyText('0770123456', 'Phone Number Copied!')">Copy Number</button>
+                </div>
+
+                <ol class="ussd-steps">
+                    <li>Dial <span class="ussd-highlight">*165*3#</span> on your MTN phone.</li>
+                    <li>Enter Merchant Code: <span class="ussd-highlight">884422</span></li>
+                    <li>Enter Amount: <span class="ussd-highlight" id="momoAmountTip">UGX 3,000</span></li>
+                    <li>Enter your MoMo PIN to confirm.</li>
+                </ol>
+            </div>
+
+            <!-- Airtel Payment Details Box -->
+            <div id="airtelDetailsBox" class="momo-pay-box" style="display: none;">
+                <div class="code-pill-row">
+                    <div>
+                        <div style="font-size: 0.7rem; color: var(--muted-color);">Airtel Money Merchant Code</div>
+                        <strong style="font-size: 1.1rem; color: #ff4d4d;">993311</strong>
+                    </div>
+                    <button class="copy-chip-btn" onclick="copyText('993311', 'Merchant Code Copied!')">Copy Code</button>
+                </div>
+
+                <div class="code-pill-row">
+                    <div>
+                        <div style="font-size: 0.7rem; color: var(--muted-color);">Direct Airtel Money Number</div>
+                        <strong style="font-size: 1.05rem; color: #ffffff;">0700 987 654</strong>
+                    </div>
+                    <button class="copy-chip-btn" onclick="copyText('0700987654', 'Phone Number Copied!')">Copy Number</button>
+                </div>
+
+                <ol class="ussd-steps">
+                    <li>Dial <span class="ussd-highlight airtel">*185*9#</span> on your Airtel phone.</li>
+                    <li>Enter Merchant Code: <span class="ussd-highlight airtel">993311</span></li>
+                    <li>Enter Amount: <span class="ussd-highlight airtel" id="airtelAmountTip">UGX 3,000</span></li>
+                    <li>Enter your Airtel PIN to confirm.</li>
+                </ol>
+            </div>
+
+            <!-- Scan QR Code section -->
+            <div class="qr-section">
+                <div style="font-size: 0.8rem; font-weight: 700; color: #fbcfe8;">OR SCAN WITH MOMO / AIRTEL APP</div>
+                <div class="qr-placeholder">
+                    <svg viewBox="0 0 100 100" fill="black">
+                        <path d="M10 10h30v30h-30z M15 15v20h20v-20z M20 20h10v10h-10z M60 10h30v30h-30z M65 15v20h20v-20z M70 20h10v10h-10z M10 60h30v30h-30z M15 65v20h20v-20z M20 70h10v10h-10z M45 10h10v10h-10z M45 30h10v10h-10z M10 45h10v10h-10z M30 45h10v10h-10z M50 50h10v10h-10z M70 45h20v10h-20z M45 60h10v20h-10z M60 60h10v10h-10z M80 60h10v30h-10z M60 80h20v10h-20z"/>
+                    </svg>
+                    <div class="qr-scan-line"></div>
+                </div>
+                <div style="font-size: 0.7rem; color: var(--muted-color);">Instant Merchant Auto-Fill</div>
+            </div>
+
+            <!-- Verification Action Buttons -->
+            <div class="verification-buttons">
+                <a href="tel:+256770123456" class="admin-call-btn">
+                    <span>📞 Call Admin</span>
+                </a>
+                <a href="#" id="whatsappConfirmBtn" target="_blank" class="whatsapp-confirm-btn">
+                    <span>💬 WhatsApp Us</span>
+                </a>
+            </div>
+
+            <button type="button" class="checkout-action-btn" style="margin-top: 0.8rem;" onclick="showOrderSuccess()">
+                <span>✓ I Have Sent Payment (Finish Order)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ORDER SUCCESS CONFIRMATION MODAL -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-card" style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 0.8rem;">🎉</div>
+            <div class="modal-header-tag">ORDER CONFIRMED</div>
+            <h3 class="modal-title" style="margin-bottom: 0.5rem;">Cans Dispatched!</h3>
+            <p style="font-size: 0.9rem; color: var(--muted-color); line-height: 1.6; margin-bottom: 1.2rem;">
+                Your ice-cold 330ml canned sodas are being packed and will arrive in <strong>30-45 minutes</strong> across Kampala. Our rider will contact your phone.
+            </p>
+            <div class="code-pill-row" style="justify-content: center; gap: 1rem; margin-bottom: 1.4rem;">
+                <span style="color: var(--muted-color); font-size: 0.85rem;">Tracking Ref:</span>
+                <strong id="finalTrackingId" style="color: #fbcfe8; font-size: 1.1rem; letter-spacing: 0.05em;">UG-CAN-78921</strong>
+            </div>
+            <div class="verification-buttons" style="margin-bottom: 1rem;">
+                <a href="tel:+256770123456" class="admin-call-btn"><span>📞 Call Admin</span></a>
+                <a href="#" id="successWhatsappBtn" target="_blank" class="whatsapp-confirm-btn"><span>💬 WhatsApp Receipt</span></a>
+            </div>
+            <button class="checkout-action-btn" onclick="closeAllModals()">Awesome, Back to Sodas</button>
+        </div>
+    </div>
+
+    <!-- GENERAL CONTENT MODAL (Ingredients, Taste, Eco, Reviews, Contact) -->
+    <div id="content-modal" class="modal-overlay">
+        <div class="modal-card" id="contentModalCard">
+            <button class="modal-close" onclick="closeAllModals()">&times;</button>
+            <div id="contentModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Hidden Preload -->
     <div style="display: none;">
-        <!-- Preload berry models to avoid lag during switch -->
         <model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blueberry.glb"></model-viewer>
         <model-viewer src="https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb"></model-viewer>
     </div>
 
+    <div id="toast">Copied to clipboard!</div>
+
     <script>
+        // DOM Elements
         const modelViewer = document.querySelector('#product-model');
         const berriesFG = document.querySelector('.berries-container');
         const berriesBG = document.querySelector('.berries-container-bg');
         const leavesBG = document.querySelector('.leaves-container');
         const allBerries = document.querySelectorAll('.berry');
-        const cards = document.querySelectorAll('.card');
+        const toast = document.getElementById('toast');
+
+        // State
         let isSwitching = false;
         let switchSpin = 0;
         let blueTexture = null;
         let greenTexture = null;
+        let currentFlavorKey = 'sprite';
 
-        // Preload textures & Warm up shaders
+        // Order State
+        let orderState = {
+            flavorName: 'Sprite Lime',
+            packUnits: 1,
+            unitPrice: 3000,
+            packLabel: 'Single Can',
+            qty: 1,
+            paymentMethod: 'mtn',
+            custName: '',
+            custPhone: '',
+            custLocation: ''
+        };
+
+        // Flavor Palettes for Uganda Canned Sodas
+        const flavorThemes = {
+            sprite: {
+                inner: '#0b8a4f', mid: '#044e29', outer: '#011409',
+                name: 'Sprite Lime', modelTexture: 'green',
+                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+            },
+            coke: {
+                inner: '#8a0b0b', mid: '#4e0404', outer: '#140101',
+                name: 'Coca-Cola Original', modelTexture: 'blue',
+                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+            },
+            stoney: {
+                inner: '#8c5311', mid: '#4d2d09', outer: '#140c02',
+                name: 'Stoney Tangawizi', modelTexture: 'green',
+                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+            },
+            fanta: {
+                inner: '#b35900', mid: '#663300', outer: '#1a0d00',
+                name: 'Fanta Orange', modelTexture: 'green',
+                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+            },
+            dew: {
+                inner: '#4c8a0b', mid: '#284e04', outer: '#0a1401',
+                name: 'Mountain Dew', modelTexture: 'green',
+                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb'
+            },
+            pepsi: {
+                inner: '#0b4f8a', mid: '#04294e', outer: '#010c14',
+                name: 'Pepsi Max', modelTexture: 'blue',
+                berrySrc: 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blueberry.glb'
+            }
+        };
+
+        const flavorKeys = Object.keys(flavorThemes);
+
+        // Preload textures & warm up shaders
         modelViewer.addEventListener('load', async () => {
             try {
                 blueTexture = await modelViewer.createTexture('https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blue%20base%20color.jpg');
                 greenTexture = await modelViewer.createTexture('https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/green%20base%20color.jpg');
 
-                // Shader Warm-up: Briefly apply textures to compile shaders
                 if (modelViewer.model) {
                     const material = modelViewer.model.materials[0];
                     if (material && material.pbrMetallicRoughness.baseColorTexture) {
-                        // Apply blue
                         material.pbrMetallicRoughness.baseColorTexture.setTexture(blueTexture);
                         await new Promise(r => requestAnimationFrame(r));
-                        // Apply green back
                         material.pbrMetallicRoughness.baseColorTexture.setTexture(greenTexture);
                     }
                 }
             } catch (e) { console.error("Texture preload failed", e); }
         });
 
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                if (isSwitching) return;
-                cards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-                const flavor = card.dataset.flavor;
-                switchFlavor(flavor);
-            });
-        });
+        // Toast feedback
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
 
-        async function switchFlavor(flavor) {
+        function copyText(text, successMsg) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(successMsg || 'Copied!');
+            }).catch(() => {
+                showToast('Copied: ' + text);
+            });
+        }
+
+        // Flavor Selector
+        function selectFlavor(key) {
+            if (isSwitching || key === currentFlavorKey) return;
+            currentFlavorKey = key;
+
+            document.querySelectorAll('.card').forEach(c => {
+                c.classList.toggle('active', c.dataset.flavor === key);
+            });
+
+            switchFlavorAnimation(key);
+        }
+
+        function cycleFlavor(dir) {
+            const curIdx = flavorKeys.indexOf(currentFlavorKey);
+            let nextIdx = curIdx + dir;
+            if (nextIdx < 0) nextIdx = flavorKeys.length - 1;
+            if (nextIdx >= flavorKeys.length) nextIdx = 0;
+            selectFlavor(flavorKeys[nextIdx]);
+
+            // Scroll carousel card into view
+            const targetCard = document.querySelector(`.card[data-flavor="${flavorKeys[nextIdx]}"]`);
+            if (targetCard) {
+                targetCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        }
+
+        async function switchFlavorAnimation(key) {
             if (isSwitching) return;
             isSwitching = true;
+            const theme = flavorThemes[key];
             const body = document.body;
             const berries = document.querySelectorAll('.berry');
             const heroCenter = document.querySelector('.hero-center');
 
-            // 1. Background Animation
-            const targetColors = flavor === 'blue' ?
-                { inner: '#0b4f8a', mid: '#04294e', outer: '#010c14' } :
-                { inner: '#0b8a78', mid: '#044e3b', outer: '#011411' };
-
+            // 1. Background Morph
             gsap.to(body, {
-                '--bg-inner': targetColors.inner,
-                '--bg-mid': targetColors.mid,
-                '--bg-outer': targetColors.outer,
-                duration: 1.5,
+                '--bg-inner': theme.inner,
+                '--bg-mid': theme.mid,
+                '--bg-outer': theme.outer,
+                duration: 1.4,
                 ease: 'power2.inOut'
             });
 
-            // 2. Can Spin Animation (Simple 360 spin + blur with back settle)
+            // 2. Can Spin Animation
             const spinObj = { val: 0, blur: 0 };
             gsap.to(spinObj, {
                 val: 360,
-                blur: 15,
-                duration: 0.6,
+                blur: 14,
+                duration: 0.55,
                 ease: "power2.in",
                 onUpdate: () => {
                     switchSpin = spinObj.val;
                     modelViewer.style.filter = `blur(${spinObj.blur}px)`;
                 },
                 onComplete: async () => {
-                    // SWAP at peak
-                    if (flavor === 'blue') {
-                        body.classList.add('blue-theme');
-                        if (modelViewer.model && blueTexture) {
-                            modelViewer.model.materials.forEach(material => {
-                                if (material.pbrMetallicRoughness.baseColorTexture) {
-                                    material.pbrMetallicRoughness.baseColorTexture.setTexture(blueTexture);
-                                }
-                            });
-                        }
-                    } else {
-                        body.classList.remove('blue-theme');
-                        if (modelViewer.model && greenTexture) {
-                            modelViewer.model.materials.forEach(material => {
-                                if (material.pbrMetallicRoughness.baseColorTexture) {
-                                    material.pbrMetallicRoughness.baseColorTexture.setTexture(greenTexture);
-                                }
-                            });
-                        }
+                    // Apply texture at peak
+                    const targetTexture = (theme.modelTexture === 'blue') ? blueTexture : greenTexture;
+                    if (modelViewer.model && targetTexture) {
+                        modelViewer.model.materials.forEach(mat => {
+                            if (mat.pbrMetallicRoughness.baseColorTexture) {
+                                mat.pbrMetallicRoughness.baseColorTexture.setTexture(targetTexture);
+                            }
+                        });
                     }
 
                     gsap.to(spinObj, {
                         val: 720,
                         blur: 0,
-                        duration: 1.5,
+                        duration: 1.3,
                         ease: "back.out(0.7)",
                         onUpdate: () => {
                             switchSpin = spinObj.val;
@@ -736,9 +1677,9 @@
                 }
             });
 
-            // 3. Berries "Hide & Reveal" with Dynamic Positioning
+            // 3. Berries Implode & Explode
             let completedBerries = 0;
-            berries.forEach((berry, i) => {
+            berries.forEach(berry => {
                 const bW = berry.offsetWidth / 2;
                 const bH = berry.offsetHeight / 2;
                 const centerX = (window.innerWidth / 2 - berry.offsetLeft - bW);
@@ -747,45 +1688,34 @@
                 const startAngle = parseFloat(berry.dataset.angle) || 0;
                 const currentBaseX = parseFloat(berry.dataset.baseX) || 0;
                 const currentBaseY = parseFloat(berry.dataset.baseY) || 0;
-
-                // New random target position - Increased range for visibility
                 const nextBaseX = (Math.random() - 0.5) * 200;
                 const nextBaseY = (Math.random() - 0.5) * 200;
 
-                gsap.set(berry, {
-                    rotation: startAngle,
-                    x: currentBaseX,
-                    y: currentBaseY
-                });
+                gsap.set(berry, { rotation: startAngle, x: currentBaseX, y: currentBaseY });
 
                 const berryTl = gsap.timeline();
-
                 berryTl.to(berry, {
                     x: centerX,
                     y: centerY,
                     rotation: startAngle + 45,
                     scale: 0.1,
                     opacity: 0,
-                    duration: 0.5,
+                    duration: 0.45,
                     ease: "power2.in",
                     onComplete: () => {
-                        berry.src = flavor === 'blue' ? 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/blueberry.glb' : 'https://api.getlayers.ai/storage/v1/object/public/public/assets/soda-14ff8a788d/cherry.glb';
+                        berry.src = theme.berrySrc;
                         heroCenter.style.zIndex = 50;
                     }
                 })
+                .to(berry, { duration: 0.25 })
                 .to(berry, {
-                    duration: 0.3
-                })
-                .to(berry, {
-                    onStart: () => {
-                        heroCenter.style.zIndex = 1;
-                    },
+                    onStart: () => { heroCenter.style.zIndex = 1; },
                     x: nextBaseX,
                     y: nextBaseY,
                     rotation: startAngle + 90,
                     scale: 1,
                     opacity: 1,
-                    duration: 0.9,
+                    duration: 0.85,
                     ease: "back.out(1.5)",
                     onComplete: () => {
                         berry.dataset.angle = startAngle + 90;
@@ -803,12 +1733,10 @@
             });
         }
 
-
-        // Track berry states for smoothing
+        // Berry states for repulsion & float
         allBerries.forEach(b => {
             b.dataset.rx = 0; b.dataset.ry = 0; b.dataset.angle = Math.random() * 360;
             b.dataset.baseX = 0; b.dataset.baseY = 0;
-            b.dataset.targetRx = 0; b.dataset.targetRy = 0;
         });
 
         let mouse = { x: 0, y: 0, px: 0, py: 0 };
@@ -823,32 +1751,25 @@
 
         function animate() {
             const time = Date.now() * 0.001;
-            // Target camera position based on mouse
-            // Smoothly interpolate current mouse to target mouse
             currentMouse.x += (mouse.x - currentMouse.x) * 0.05;
             currentMouse.y += (mouse.y - currentMouse.y) * 0.05;
 
-            // Tilt the product can + add switch spin
             modelViewer.cameraOrbit = `${(currentMouse.x * 40) + switchSpin}deg ${90 + (currentMouse.y * 20)}deg 380%`;
 
-            // Update parallax containers - Always
             berriesFG.style.transform = `translate(${currentMouse.x * 60}px, ${currentMouse.y * 60}px)`;
             berriesBG.style.transform = `translate(${currentMouse.x * -30}px, ${currentMouse.y * -30}px)`;
             leavesBG.style.transform = `translate(${currentMouse.x * -15}px, ${currentMouse.y * -15}px)`;
 
-            // Update each berry with its own smoothing and float - ONLY IF NOT SWITCHING
             if (!isSwitching) {
                 allBerries.forEach((berry, i) => {
                     const berryRect = berry.getBoundingClientRect();
                     const berryX = berryRect.left + berryRect.width / 2;
                     const berryY = berryRect.top + berryRect.height / 2;
-
                     const diffX = mouse.px - berryX;
                     const diffY = mouse.py - berryY;
                     const distance = Math.sqrt(diffX * diffX + diffY * diffY);
 
                     let targetRx = 0, targetRy = 0, speedMult = 1;
-
                     if (distance < 400) {
                         const force = (400 - distance) / 400;
                         targetRx = (diffX / distance) * force * -80;
@@ -856,7 +1777,6 @@
                         speedMult = 1 + force * 5;
                     }
 
-                    // Lerp repulsion values
                     let rx = parseFloat(berry.dataset.rx) || 0;
                     let ry = parseFloat(berry.dataset.ry) || 0;
                     let angle = parseFloat(berry.dataset.angle) || 0;
@@ -871,7 +1791,6 @@
                     berry.dataset.ry = ry;
                     berry.dataset.angle = angle;
 
-                    // Floating effect
                     const dur = [5, 7, 6, 8, 5.5, 6.5, 9, 11, 10][i % 9];
                     const phase = (time + i * 0.7) * (Math.PI * 2 / dur);
                     const floatY = Math.sin(phase) * 15;
@@ -881,7 +1800,6 @@
                 });
             }
 
-            // Update leaves with float - ALWAYS
             document.querySelectorAll('.leaf').forEach((leaf, i) => {
                 const dur = 10 + i * 2;
                 const phase = (time + i * 1.2) * (Math.PI * 2 / dur);
@@ -893,10 +1811,9 @@
 
             requestAnimationFrame(animate);
         }
-
         animate();
 
-        // Bubbles Generator using bubble.png
+        // Rising Bubbles
         const bubblesContainer = document.getElementById('bubbles-container');
         function createBubble() {
             if (!bubblesContainer) return;
@@ -917,6 +1834,286 @@
             setTimeout(() => bubble.remove(), duration * 1000);
         }
         setInterval(createBubble, 400);
+
+        // MODAL MANAGEMENT
+        function closeAllModals() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+        }
+
+        // Close on Escape or Backdrop Click
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAllModals();
+        });
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeAllModals();
+            });
+        });
+
+        function openHomeTab(e) {
+            if (e) e.preventDefault();
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelector('.nav-item:first-child').classList.add('active');
+            closeAllModals();
+        }
+
+        // ORDER CALCULATION LOGIC
+        function formatUGX(num) {
+            return 'UGX ' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function calculateOrderTotal() {
+            const total = orderState.unitPrice * orderState.qty;
+            document.getElementById('orderTotalVal').textContent = formatUGX(total);
+            document.getElementById('orderSummaryText').textContent = `${orderState.qty} × ${orderState.flavorName} (${orderState.packLabel})`;
+            return total;
+        }
+
+        function setOrderFlavor(flavorName, el) {
+            orderState.flavorName = flavorName;
+            document.querySelectorAll('.shop-flavor-item').forEach(f => f.classList.remove('active'));
+            el.classList.add('active');
+            calculateOrderTotal();
+        }
+
+        function setPack(units, price, el) {
+            orderState.packUnits = units;
+            orderState.unitPrice = price;
+            orderState.packLabel = units === 1 ? 'Single Can' : (units === 24 ? '24 Crate' : `${units}-Pack`);
+            document.querySelectorAll('.pack-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            calculateOrderTotal();
+        }
+
+        function updateQty(delta) {
+            orderState.qty = Math.max(1, orderState.qty + delta);
+            document.getElementById('orderQtyVal').textContent = orderState.qty;
+            calculateOrderTotal();
+        }
+
+        function setPaymentMethod(method) {
+            orderState.paymentMethod = method;
+            document.getElementById('payMtnCard').classList.toggle('active', method === 'mtn');
+            document.getElementById('payAirtelCard').classList.toggle('active', method === 'airtel');
+        }
+
+        function openShopModal() {
+            closeAllModals();
+            document.getElementById('shop-modal').classList.add('active');
+            calculateOrderTotal();
+        }
+
+        function proceedToPaymentStep() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const loc = document.getElementById('custLocation').value.trim();
+
+            if (!name || !phone || !loc) {
+                showToast('Please fill in your Name, Phone & Location!');
+                return;
+            }
+
+            orderState.custName = name;
+            orderState.custPhone = phone;
+            orderState.custLocation = loc;
+
+            const totalFormatted = formatUGX(calculateOrderTotal());
+
+            // Prepare Payment Modal
+            document.getElementById('momoPayTotal').textContent = totalFormatted;
+            document.getElementById('momoAmountTip').textContent = totalFormatted;
+            document.getElementById('airtelAmountTip').textContent = totalFormatted;
+            document.getElementById('momoOrderRef').textContent = `${orderState.qty} × ${orderState.flavorName} (${orderState.packLabel}) for ${name}`;
+
+            if (orderState.paymentMethod === 'mtn') {
+                document.getElementById('paymentMethodTag').textContent = '🟡 MTN MOMOPAY CHECKOUT';
+                document.getElementById('mtnDetailsBox').style.display = 'block';
+                document.getElementById('airtelDetailsBox').style.display = 'none';
+            } else {
+                document.getElementById('paymentMethodTag').textContent = '🔴 AIRTEL MONEY PAY CHECKOUT';
+                document.getElementById('mtnDetailsBox').style.display = 'none';
+                document.getElementById('airtelDetailsBox').style.display = 'block';
+            }
+
+            // Prepare WhatsApp link
+            const waMsg = encodeURIComponent(
+                `Hello Pure Soda Uganda! 🥤\n\nI have submitted an order:\n- Item: ${orderState.qty} × ${orderState.flavorName} (${orderState.packLabel})\n- Total: ${totalFormatted}\n- Name: ${name}\n- Phone: ${phone}\n- Delivery Address: ${loc}\n- Paid via: ${orderState.paymentMethod.toUpperCase()} Mobile Money\n\nPlease confirm dispatch!`
+            );
+            const waUrl = `https://wa.me/256770123456?text=${waMsg}`;
+            document.getElementById('whatsappConfirmBtn').href = waUrl;
+            document.getElementById('successWhatsappBtn').href = waUrl;
+
+            closeAllModals();
+            document.getElementById('payment-modal').classList.add('active');
+        }
+
+        function showOrderSuccess() {
+            const randomRef = 'UG-CAN-' + Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('finalTrackingId').textContent = randomRef;
+            closeAllModals();
+            document.getElementById('success-modal').classList.add('active');
+        }
+
+        // TABS CONTENT INGREDIENTS, TASTE, ECO, REVIEWS, CONTACT
+        function openInfoModal(type, e) {
+            if (e) e.preventDefault();
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            if (e && e.target) e.target.classList.add('active');
+
+            const body = document.getElementById('contentModalBody');
+            closeAllModals();
+
+            if (type === 'ingredients') {
+                body.innerHTML = `
+                    <div class="modal-header-tag">🔬 PURE REFRESHMENT FACTS</div>
+                    <h3 class="modal-title">100% Canned Quality</h3>
+                    <p style="font-size:0.85rem; color:var(--muted-color); margin-bottom:1.2rem;">
+                        Our 330ml aluminum cans preserve peak carbonation, authentic aroma, and chill 3x faster than glass or plastic bottles.
+                    </p>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>💧 Artesian Carbonated Water</h4>
+                            <p>Deep spring purified water saturated with high-retention micro-bubbles for an ultra-crisp throat hit.</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🌿 Natural Fruit Extracts</h4>
+                            <p>Authentic Ugandan ginger root for Stoney, sun-ripened Persian lime zest for Sprite, and Valencia orange oils for Fanta.</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>⚡ Pure Cane Sugar & Zero Options</h4>
+                            <p>Real unrefined East African cane sugar or 100% plant-based Stevia extract in zero-sugar editions.</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🛡️ Zero Preservatives</h4>
+                            <p>Hermetically sealed aluminum cans block 100% UV light and oxygen without synthetic chemical preservatives.</p>
+                        </div>
+                    </div>
+                    <button class="checkout-action-btn" onclick="openShopModal()">Order Chilled Cans Now</button>
+                `;
+            } else if (type === 'taste') {
+                body.innerHTML = `
+                    <div class="modal-header-tag">✨ SENSORY FLAVOR PROFILES</div>
+                    <h3 class="modal-title">Uganda's Flavor Icons</h3>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <strong style="color:#fbcfe8;">🌿 Sprite Lime (330ml Can)</strong>
+                            <span style="font-size:0.75rem; color:#22c55e;">Ultra-Crisp</span>
+                        </div>
+                        <p class="review-text">Explosion of tangy green lime and Meyer lemon zest with a frosty, clean palate cleanser finish.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <strong style="color:#fbcfe8;">🔥 Stoney Tangawizi (330ml Can)</strong>
+                            <span style="font-size:0.75rem; color:#eab308;">Fiery Heat</span>
+                        </div>
+                        <p class="review-text">Intense spicy Ugandan ginger bite with warm aromatic clove undertones. Guaranteed to awaken your senses.</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <strong style="color:#fbcfe8;">❤️ Coca-Cola Original (330ml Can)</strong>
+                            <span style="font-size:0.75rem; color:#ef4444;">Timeless Classic</span>
+                        </div>
+                        <p class="review-text">Deep rich caramel, kola nut infusion, and crisp sparkling carbonation served ice cold.</p>
+                    </div>
+                    <button class="checkout-action-btn" onclick="openShopModal()">Try All Flavors</button>
+                `;
+            } else if (type === 'eco') {
+                body.innerHTML = `
+                    <div class="modal-header-tag">♻️ CIRCULAR ECONOMY UGANDA</div>
+                    <h3 class="modal-title">Why We Sell Only Cans</h3>
+                    <p style="font-size:0.85rem; color:var(--muted-color); margin-bottom:1.2rem;">
+                        Aluminum is 100% infinitely recyclable. Unlike plastic bottles that pollute Lake Victoria, every can you enjoy returns to the shelf in 60 days.
+                    </p>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>🏭 95% Less Energy</h4>
+                            <p>Recycling aluminum uses 95% less energy than producing virgin metal from bauxite ore.</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🌱 Zero Plastic Waste</h4>
+                            <p>Eliminating plastic bottles from Kampala streets and supporting local scrap metal collectors.</p>
+                        </div>
+                    </div>
+                    <div class="review-card" style="border-color:#22c55e;">
+                        <strong style="color:#22c55e;">🇺🇬 Kampala Green Can Initiative</strong>
+                        <p style="font-size:0.8rem; color:var(--muted-color); margin-top:0.3rem;">
+                            We partner with local recycling hubs in Nakawa, Industrial Area, and Jinja to ensure zero cans end up in landfills.
+                        </p>
+                    </div>
+                    <button class="checkout-action-btn" onclick="openShopModal()">Support Green Uganda</button>
+                `;
+            } else if (type === 'reviews') {
+                body.innerHTML = `
+                    <div class="modal-header-tag">⭐ VERIFIED KAMPALA CUSTOMERS</div>
+                    <h3 class="modal-title">What Uganda is Saying</h3>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">Kenneth Mugisha</div>
+                                <div class="review-loc">Kololo, Kampala</div>
+                            </div>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                        <p class="review-text">"Ordered a 24-can crate of Stoney and Sprite for our office party. Arrived in 25 mins ice-cold. Paid smoothly with MTN MoMoPay!"</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">Sarah Namubiru</div>
+                                <div class="review-loc">Bugolobi, Kampala</div>
+                            </div>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                        <p class="review-text">"The crispness of canned soda is 10x better than plastic bottles. Plus UGX 3,000 per can is the exact standard price. Super convenient."</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">David Ochieng</div>
+                                <div class="review-loc">Nakasero, Kampala</div>
+                            </div>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                        <p class="review-text">"Airtel Money checkout worked effortlessly. Dialed *185*9# with the merchant code and rider called immediately."</p>
+                    </div>
+                    <button class="checkout-action-btn" onclick="openShopModal()">Order Your Cans Now</button>
+                `;
+            }
+
+            document.getElementById('content-modal').classList.add('active');
+        }
+
+        function openContactModal() {
+            closeAllModals();
+            const body = document.getElementById('contentModalBody');
+            body.innerHTML = `
+                <div class="modal-header-tag">📞 DIRECT CONTACT & WHOLESALE</div>
+                <h3 class="modal-title">Get In Touch</h3>
+                <p style="font-size:0.85rem; color:var(--muted-color); margin-bottom:1.2rem;">
+                    For bulk crate orders, weddings, corporate events, or fast delivery inquiries across Uganda:
+                </p>
+                <div class="code-pill-row">
+                    <div>
+                        <div style="font-size:0.7rem; color:var(--muted-color);">Customer Care & Hotline</div>
+                        <strong style="color:#ffffff;">+256 770 123 456 / +256 700 987 654</strong>
+                    </div>
+                    <a href="tel:+256770123456" class="copy-chip-btn" style="text-decoration:none;">Call</a>
+                </div>
+                <div class="code-pill-row">
+                    <div>
+                        <div style="font-size:0.7rem; color:var(--muted-color);">Kampala Distribution Center</div>
+                        <strong style="color:#ffffff;">Plot 42, 6th Street Industrial Area, Kampala</strong>
+                    </div>
+                </div>
+                <form onsubmit="event.preventDefault(); showToast('Message Sent! We will call you shortly.'); closeAllModals();" style="margin-top:1rem;">
+                    <input type="text" class="glass-input" placeholder="Your Name" required>
+                    <input type="tel" class="glass-input" placeholder="Phone Number (+256...)" required>
+                    <textarea class="glass-input" rows="3" placeholder="How many cans or crates do you need?" required style="resize:none;"></textarea>
+                    <button type="submit" class="checkout-action-btn">Send Message</button>
+                </form>
+            `;
+            document.getElementById('content-modal').classList.add('active');
+        }
     </script>
 </body>
 </html>
